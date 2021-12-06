@@ -28,10 +28,34 @@ namespace Client
         }
         static void Main(string[] args)
         {
-            kliens=new ServiceReference1.Service1Client();
+            kliens =new ServiceReference1.Service1Client();
+            string uid = null;
             try
             {
-                List<Felhasznalo> felhasznalok = new List<Felhasznalo>(kliens.FelhasznaloiLista());
+                uid = kliens.Login("admin", CreateMD5("admin"));
+            }
+            catch (FaultException<ServiceReference1.ServiceFault> e)
+            {
+                Console.WriteLine(e.Detail.Details);
+            }
+            catch (Exception e)
+            {
+                //Console.WriteLine(e.Message);
+            }
+            Felhasznalo masikFelhasznalo = new Felhasznalo { BNev = "Józsi", Jelszo = CreateMD5("Kankalin"), FNev = "Józsi bácsi", Jog = 4, Aktiv = 0 };
+            try
+            {
+                Console.WriteLine(kliens.InsertUser(uid, masikFelhasznalo));
+                //Console.WriteLine(kliens.DeleteUser(uid, "Józsi"));
+            }
+            
+            catch (FaultException<ServiceReference1.ServiceFault> e)
+            {
+                Console.WriteLine(e.Detail.Details);
+            }
+            try
+            {
+                List<Felhasznalo> felhasznalok = new List<Felhasznalo>(kliens.FelhasznaloiLista(uid));
                 foreach (Felhasznalo egyFelhasznalo in felhasznalok)
                 {
                     Console.WriteLine("{0} {1} {2} {3} {4} {5}", egyFelhasznalo.Id, egyFelhasznalo.BNev, egyFelhasznalo.Jelszo, egyFelhasznalo.FNev, egyFelhasznalo.Jog, egyFelhasznalo.Aktiv);
@@ -45,38 +69,30 @@ namespace Client
             {
                 Console.WriteLine(e.Detail.Details);
             }
-            catch (Exception e)
+            catch(Exception e)
             {
-                Console.WriteLine("Nem szerver ,nem adatbázis hiba");
+                Console.WriteLine("Nem szerver, nem adatbázis hiba üzi jön ide!");
                 Console.WriteLine(e.Message);
             }
-            Felhasznalo masikFelhasznalo = new Felhasznalo { Id = 2, BNev = "Józsi", Jelszo = "Kankalin", FNev = "Józsi bácsi", Jog = 4, Aktiv = 0 };
+            
             Felhasznalo harmadikFelhasznalo = new Felhasznalo();
             harmadikFelhasznalo.Jelszo = "kfnsdlkfjsdnlkjg";
             Console.WriteLine(masikFelhasznalo.BNev);
-            try
-            {
-                Console.WriteLine(kliens.Login("Robi", CreateMD5("Robi")));
-            }
-            catch (FaultException <ServiceReference1.ServiceFault> e)
-            {
-                Console.WriteLine(e.Detail.Details);
-            }
-            catch (Exception e)
-            {
-               // Console.WriteLine("");
-            }
-            Console.WriteLine(kliens.LoginAsync("Robi", CreateMD5("Robi")));
-            System.Threading.Tasks.Task<string> loginAsync = kliens.LoginAsync("Robi", CreateMD5("Robi"));
+            
+            Console.WriteLine(kliens.LoginAsync("admin", CreateMD5("admin")));
+            System.Threading.Tasks.Task<string> loginAsync = kliens.LoginAsync("admin", CreateMD5("admin"));
             Console.WriteLine(loginAsync.Status);
             string asyncUid = loginAsync.Result;
             Console.WriteLine(loginAsync.Status);
             Console.WriteLine(asyncUid);
             Felhasznalo[] lista2;
-            lista2 = kliens.FelhasznaloiLista();
-            List<Felhasznalo> felhasznalok2 = new List<Felhasznalo>(kliens.FelhasznaloiLista());
-            System.Threading.Tasks.Task<Felhasznalo[]> FlAsync = kliens.FelhasznaloiListaAsync();
+            lista2 = kliens.FelhasznaloiLista(uid);
+            List<Felhasznalo> felhasznalok2 = new List<Felhasznalo>(kliens.FelhasznaloiLista(uid));
+            System.Threading.Tasks.Task<Felhasznalo[]> FlAsync = kliens.FelhasznaloiListaAsync(uid);
             Felhasznalo[] ft=FlAsync.Result;
+
+            
+
             Console.ReadKey();
         }
     }

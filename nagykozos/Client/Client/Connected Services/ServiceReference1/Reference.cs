@@ -15,6 +15,113 @@ namespace Client.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Server")]
+    [System.SerializableAttribute()]
+    public partial class ServiceFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DetailsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Details {
+            get {
+                return this.DetailsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DetailsField, value) != true)) {
+                    this.DetailsField = value;
+                    this.RaisePropertyChanged("Details");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Record", Namespace="http://schemas.datacontract.org/2004/07/Server")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.ServiceReference1.Felhasznalo))]
+    public partial class Record : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> IdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Felhasznalo", Namespace="http://schemas.datacontract.org/2004/07/Server")]
     [System.SerializableAttribute()]
     public partial class Felhasznalo : Client.ServiceReference1.Record {
@@ -100,125 +207,46 @@ namespace Client.ServiceReference1 {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Record", Namespace="http://schemas.datacontract.org/2004/07/Server")]
-    [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.ServiceReference1.Felhasznalo))]
-    public partial class Record : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> IdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Server")]
-    [System.SerializableAttribute()]
-    public partial class ServiceFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DetailsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MessageField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Details {
-            get {
-                return this.DetailsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DetailsField, value) != true)) {
-                    this.DetailsField = value;
-                    this.RaisePropertyChanged("Details");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message {
-            get {
-                return this.MessageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
-                    this.MessageField = value;
-                    this.RaisePropertyChanged("Message");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1")]
     public interface IService1 {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/FelhasznaloiLista", ReplyAction="http://tempuri.org/IService1/FelhasznaloiListaResponse")]
-        Client.ServiceReference1.Felhasznalo[] FelhasznaloiLista();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteUserId", ReplyAction="http://tempuri.org/IService1/DeleteUserIdResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference1.ServiceFault), Action="http://tempuri.org/IService1/DeleteUserIdServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Server")]
+        string DeleteUserId(string uid, int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteUserId", ReplyAction="http://tempuri.org/IService1/DeleteUserIdResponse")]
+        System.Threading.Tasks.Task<string> DeleteUserIdAsync(string uid, int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteUser", ReplyAction="http://tempuri.org/IService1/DeleteUserResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference1.ServiceFault), Action="http://tempuri.org/IService1/DeleteUserServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Server")]
+        string DeleteUser(string uid, string bNev);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteUser", ReplyAction="http://tempuri.org/IService1/DeleteUserResponse")]
+        System.Threading.Tasks.Task<string> DeleteUserAsync(string uid, string bNev);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/InsertUserWeb", ReplyAction="http://tempuri.org/IService1/InsertUserWebResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference1.ServiceFault), Action="http://tempuri.org/IService1/InsertUserWebServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Server")]
+        string InsertUserWeb(string uid, string bNev, string jelszo, string fNev, int jog, int aktiv);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/InsertUserWeb", ReplyAction="http://tempuri.org/IService1/InsertUserWebResponse")]
+        System.Threading.Tasks.Task<string> InsertUserWebAsync(string uid, string bNev, string jelszo, string fNev, int jog, int aktiv);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/InsertUser", ReplyAction="http://tempuri.org/IService1/InsertUserResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference1.ServiceFault), Action="http://tempuri.org/IService1/InsertUserServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Server")]
+        string InsertUser(string uid, Client.ServiceReference1.Felhasznalo user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/InsertUser", ReplyAction="http://tempuri.org/IService1/InsertUserResponse")]
+        System.Threading.Tasks.Task<string> InsertUserAsync(string uid, Client.ServiceReference1.Felhasznalo user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/FelhasznaloiLista", ReplyAction="http://tempuri.org/IService1/FelhasznaloiListaResponse")]
-        System.Threading.Tasks.Task<Client.ServiceReference1.Felhasznalo[]> FelhasznaloiListaAsync();
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference1.ServiceFault), Action="http://tempuri.org/IService1/FelhasznaloiListaServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Server")]
+        Client.ServiceReference1.Felhasznalo[] FelhasznaloiLista(string uid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/FelhasznaloiLista", ReplyAction="http://tempuri.org/IService1/FelhasznaloiListaResponse")]
+        System.Threading.Tasks.Task<Client.ServiceReference1.Felhasznalo[]> FelhasznaloiListaAsync(string uid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Login", ReplyAction="http://tempuri.org/IService1/LoginResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference1.ServiceFault), Action="http://tempuri.org/IService1/LoginServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Server")]
         string Login(string bNev, string jelszo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Login", ReplyAction="http://tempuri.org/IService1/LoginResponse")]
@@ -259,12 +287,44 @@ namespace Client.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public Client.ServiceReference1.Felhasznalo[] FelhasznaloiLista() {
-            return base.Channel.FelhasznaloiLista();
+        public string DeleteUserId(string uid, int id) {
+            return base.Channel.DeleteUserId(uid, id);
         }
         
-        public System.Threading.Tasks.Task<Client.ServiceReference1.Felhasznalo[]> FelhasznaloiListaAsync() {
-            return base.Channel.FelhasznaloiListaAsync();
+        public System.Threading.Tasks.Task<string> DeleteUserIdAsync(string uid, int id) {
+            return base.Channel.DeleteUserIdAsync(uid, id);
+        }
+        
+        public string DeleteUser(string uid, string bNev) {
+            return base.Channel.DeleteUser(uid, bNev);
+        }
+        
+        public System.Threading.Tasks.Task<string> DeleteUserAsync(string uid, string bNev) {
+            return base.Channel.DeleteUserAsync(uid, bNev);
+        }
+        
+        public string InsertUserWeb(string uid, string bNev, string jelszo, string fNev, int jog, int aktiv) {
+            return base.Channel.InsertUserWeb(uid, bNev, jelszo, fNev, jog, aktiv);
+        }
+        
+        public System.Threading.Tasks.Task<string> InsertUserWebAsync(string uid, string bNev, string jelszo, string fNev, int jog, int aktiv) {
+            return base.Channel.InsertUserWebAsync(uid, bNev, jelszo, fNev, jog, aktiv);
+        }
+        
+        public string InsertUser(string uid, Client.ServiceReference1.Felhasznalo user) {
+            return base.Channel.InsertUser(uid, user);
+        }
+        
+        public System.Threading.Tasks.Task<string> InsertUserAsync(string uid, Client.ServiceReference1.Felhasznalo user) {
+            return base.Channel.InsertUserAsync(uid, user);
+        }
+        
+        public Client.ServiceReference1.Felhasznalo[] FelhasznaloiLista(string uid) {
+            return base.Channel.FelhasznaloiLista(uid);
+        }
+        
+        public System.Threading.Tasks.Task<Client.ServiceReference1.Felhasznalo[]> FelhasznaloiListaAsync(string uid) {
+            return base.Channel.FelhasznaloiListaAsync(uid);
         }
         
         public string Login(string bNev, string jelszo) {

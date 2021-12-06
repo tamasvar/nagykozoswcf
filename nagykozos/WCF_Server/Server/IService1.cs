@@ -10,18 +10,82 @@ namespace Server
 {
         [ServiceContract]
     public interface IService1
-    { 
+    {
         [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+
+        [WebInvoke(Method = "PUT",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedRequest,
+            UriTemplate = "/UpdateUserWeb?uid={uid}&id={id}&bNev={bNev}&jelszo={jelszo}&fNev={fNev}&jog={jog}&aktiv={aktiv}"
+            )]
+        string UpdateUserWeb(string uid, int id, string bNev, string jelszo, string fNev, int jog, int aktiv);    //UPDATE
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+
+        [WebInvoke(Method = "PUT",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedRequest
+            )]
+        string UpdateUser(string uid, Felhasznalo user);    //UPDATE
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+
+        [WebInvoke(Method = "DELETE",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedRequest,
+            UriTemplate = "/DeleteUserId?uid={uid}&id={id}"
+            )]
+        string DeleteUserId(string uid, int id);    //DELETE
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+
+        [WebInvoke(Method = "DELETE",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedRequest,
+            UriTemplate = "/DeleteUser?uid={uid}&bNev={bNev}"
+            )]
+        string DeleteUser(string uid, string bNev);    //DELETE
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+
+        [WebInvoke(Method = "POST",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedRequest,
+            UriTemplate = "/InsertUserWeb?uid={uid}&bNev={bNev}&jelszo={jelszo}&fNev={fNev}&jog={jog}&aktiv={aktiv}"
+            )]
+        string InsertUserWeb(string uid, string bNev, string jelszo, string fNev, int jog, int aktiv);    //INSERT
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+
+        [WebInvoke(Method = "POST",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedRequest
+            )]
+        string InsertUser(string uid, Felhasznalo user);    //INSERT
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
 
         [WebInvoke(Method = "GET",
-               RequestFormat = WebMessageFormat.Json,
-               ResponseFormat = WebMessageFormat.Json,
-               // BodyStyle = WebMessageBodyStyle.WrappedRequest,
-               UriTemplate = "/FelhasznaloiLista?uid={uid}"
-               )]
-        List<Felhasznalo> FelhasznaloiLista(string uid);
-        [FaultContract(typeof(ServiceFault))]
-        
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedRequest,
+            UriTemplate = "/FelhasznaloiLista?uid={uid}"
+            )]
+        List<Felhasznalo> FelhasznaloiLista(string uid);    //SELECT
+
         [OperationContract]
         [WebInvoke(Method ="POST",
             RequestFormat =WebMessageFormat.Json,

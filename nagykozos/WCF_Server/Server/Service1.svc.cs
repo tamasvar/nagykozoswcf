@@ -12,6 +12,99 @@ namespace Server
     {
         static Dictionary<string, string> bejelentkezettek = new Dictionary<string, string>();
 
+        public string UpdateUserWeb(string uid, int id, string bNev, string jelszo, string fNev, int jog, int aktiv)
+        {
+
+            return UpdateUser(uid, new Felhasznalo {Id=id, BNev=bNev,Jelszo=jelszo,FNev=fNev,Jog=jog,Aktiv=aktiv });
+        }
+
+        public string UpdateUser(string uid, Felhasznalo user)
+        {
+            if (bejelentkezettek.ContainsKey(uid) && uid[0] == '9')
+            {
+                DatabaseManagers.UsersManager tblUserManager = new DatabaseManagers.UsersManager();
+                if (tblUserManager.Update(user) > 0)
+                {
+                    return "A felhasználó adatai sikeresen módosítva.";
+                }
+                else
+                {
+                    return "A felhasználó módosítása sikertelen.";
+                }
+            }
+            else
+            {
+                return "Csak bejelentkezett és 9-es jogosultságú felhasználó módosíthat adatot.";
+            }
+        }
+
+        public string DeleteUserId(string uid, int id)
+        {
+            if (bejelentkezettek.ContainsKey(uid) && uid[0] == '9')
+            {
+                DatabaseManagers.UsersManager tblUserManager = new DatabaseManagers.UsersManager();
+                if(tblUserManager.Delete(id)> 0)
+                {
+                    return "A felhasználó sikeresen törölve.";
+                }
+                else
+                {
+                    return "A felhasználó törlése sikertelen.";
+                }
+            }
+            else
+            {
+                return "Csak bejelentkezett és 9-es jogosultságú felhasználó törölhet adatot.";
+            }
+        }
+
+        public string DeleteUser(string uid, string bNev)
+        {
+            if (bejelentkezettek.ContainsKey(uid) && uid[0] == '9')
+            {
+                DatabaseManagers.UsersManager tblUserManager = new DatabaseManagers.UsersManager();
+                Felhasznalo user =  tblUserManager.FelhasznaloiAdatok(bNev);
+                
+                if (user.Id != null)
+                {
+                    return DeleteUserId(uid, (int)user.Id);
+                }
+                else
+                {
+                    return "A felhasználó törlése sikertelen. (nincs ilyen nevű felhasználó (bNev))";
+                }
+            }
+            else
+            {
+                return "Csak bejelentkezett és 9-es jogosultságú felhasználó törölhet adatot.";
+            }
+        }
+
+        public string InsertUserWeb(string uid, string bNev, string jelszo, string fNev, int jog, int aktiv)
+        {
+            return InsertUser(uid, new Felhasznalo(bNev, jelszo, fNev, jog, aktiv));
+        }
+
+        public string InsertUser(string uid, Felhasznalo user)
+        {
+            if(bejelentkezettek.ContainsKey(uid) && uid[0] == '9')
+            {
+                DatabaseManagers.UsersManager tblUserManager = new DatabaseManagers.UsersManager();
+                if(tblUserManager.Insert(user)>0)
+                {
+                    return "A felhasnáló sikeresen felvéve az adatbázisba.";
+                }
+                else
+                {
+                    return "A felhasználó felvétele sikertelen. (már van ilyen nevű felhasználó (bNev))";
+                }
+            }
+            else
+            {
+                return "Csak bejelentkezett és 9-es jogosultságú felhasználó vehet fel adatot.";
+            }
+        }
+
         public string Logout(string uid)
         {
             lock (bejelentkezettek)
@@ -77,19 +170,21 @@ namespace Server
         }
         public List<Felhasznalo> FelhasznaloiLista(string uid)
         {
-            Console.WriteLine("itt vok");
             List<Felhasznalo> felhasznalok = new List<Felhasznalo>();
-            DatabaseManagers.ISQL tblUsersManager = new DatabaseManagers.UsersManager();
-            List<Record> records = tblUsersManager.Select();
-            foreach (Record egyRekord in records)
+            if(bejelentkezettek.ContainsKey(uid) && uid[0] == 9)
             {
-                if (egyRekord is Felhasznalo)
+                DatabaseManagers.ISQL tblUsersManager = new DatabaseManagers.UsersManager();
+                List<Record> records = tblUsersManager.Select();
+                foreach (Record egyRekord in records)
                 {
-                    felhasznalok.Add(egyRekord as Felhasznalo);
+                    if (egyRekord is Felhasznalo)
+                    {
+                        felhasznalok.Add(egyRekord as Felhasznalo);
+                    }
                 }
             }
-            Console.WriteLine("ittt is wok");
             return felhasznalok;
         }
+        
     }
 }
